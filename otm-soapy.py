@@ -1,4 +1,4 @@
-import webapp2, simplejson, urllib, random
+import webapp2, simplejson, urllib, random, logging
 from pysimplesoap.server import SoapDispatcher, WSGISOAPHandler
 from lxml import etree
 
@@ -388,7 +388,15 @@ class LookupDistance(webapp2.RequestHandler):
 		soap_response = soap_response.replace('xmlns:n="http://xmlns.oracle.com/apps/otm/distanceengine" ', '')
 		self.response.write(soap_response)
 
+class LogPost(webapp2.RequestHandler):
+	def get(self):
+		self.response.write('The HTTP Get method is not supported by this URL')
+
+	def post(self):
+		logging.info(self.request.body)
+
 app = webapp2.WSGIApplication([
 	('/cost_shipment', CostShipment),
 	('/lookup_distance', LookupDistance),
+	('/log_post', LogPost),
 	], debug=True)
