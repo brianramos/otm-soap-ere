@@ -400,3 +400,4 @@ app = webapp2.WSGIApplication([
 	('/lookup_distance', LookupDistance),
 	('/log_post', LogPost),
 	], debug=True)
+
